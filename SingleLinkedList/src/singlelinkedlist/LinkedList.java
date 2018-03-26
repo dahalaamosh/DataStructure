@@ -12,10 +12,17 @@ package singlelinkedlist;
 public class LinkedList {
     
     class Node{
-        int data; 
+        int data;
+        int key;
         Node next;
         
         public Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+        
+        public Node(int key, int data){
+            this.key = key;
             this.data = data;
             this.next = null;
         }
@@ -34,6 +41,17 @@ public class LinkedList {
         }
         else{
             Node temp = new Node(item);
+            temp.next = head; 
+            head = temp; 
+        }
+    }
+    
+    public void addForHash(int key, int item){
+        if(isEmpty()){
+            head = new Node(key, item);
+        }
+        else{
+            Node temp = new Node(key, item);
             temp.next = head; 
             head = temp; 
         }
@@ -92,6 +110,26 @@ public class LinkedList {
             p = p.next;
         }
         System.out.println("*****************");
+    }
+    
+    
+    public void printForHash(int key){
+        Node p = head;
+        boolean found = false;
+        while(p!= null){
+            if(p.key == key){
+                System.out.println(p.data);
+                found = true;
+                break; 
+            }
+            else{
+                p = p.next; 
+            } 
+        }
+        
+        if(!found){
+                System.out.println("Value not found.");
+            }
     }
     
     public void indexRemove(int index){
